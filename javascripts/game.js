@@ -39,6 +39,7 @@ function updateNewPlayer(reseted) {
     } else var modesChosen = modes
     player = {
         money: new Decimal(modesChosen.ngmm>2?200:modesChosen.ngp>1?20:10),
+		layer: (player ? player.layer : 0),
         tickSpeedCost: new Decimal(1000),
         tickspeed: new Decimal(modesChosen.ngp>1?500:1000),
         firstCost: new Decimal(10),
@@ -2989,6 +2990,7 @@ function galaxyReset(bulk) {
     if (player.tickspeedBoosts !== undefined) player.tickspeedBoosts = 0
     player = {
         money: player.achievements.includes("r111") ? player.money : new Decimal(10),
+		layer: player.layer,
         tickSpeedCost: new Decimal(1000),
         tickBoughtThisInf: updateTBTIonGalaxy(),
         firstCost: new Decimal(10),
@@ -3348,12 +3350,18 @@ function changeSaveDesc(saveId, placement) {
 			if (temp.exdilation.times > 0) message+=tempstart+tempend+", Ex-dilation: "+shortenDimensions(new Decimal(temp.exdilation.unspent))
 			else message+=tempstart+", Dilated time: "+shortenMoney(new Decimal(temp.dilation.dilatedTime))+", Banked infinities: "+getFullExpansion(temp.infinitiedBank)+", Replicanti: "+shortenMoney(new Decimal(temp.replicanti.amount))+tempend
 		} else if (temp.dilation?temp.dilation.studies.includes(1):false) {
+			if (player.layer > 0 && player.layer < 100 ) { 
+				message += "Layer of suffering: " + player.layer + "<br>";
+			}
 			var temp2="Tachyon particles: "+shortenMoney(new Decimal(temp.dilation.totalTachyonParticles))+", Dilated time: "+shortenMoney(new Decimal(temp.dilation.dilatedTime))
 			if (temp.dilation.studies.includes(6)) temp2+=", Best meta-antimatter: "+shortenMoney(new Decimal(temp.meta.bestAntimatter))+", Meta-dimension shifts/boosts: "+temp.meta.resets
 			else if (!temp.dilation.studies.includes(5)) temp2="Time Theorems: "+shortenMoney(getTotalTT(temp))+", "+temp2
 			else if (!temp.dilation.upgrades.includes(10)) temp2="Eternity points: "+shortenDimensions(temp.eternityPoints)+", "+temp2
 			message+=temp2
 		} else {
+			if (player.layer > 0 && player.layer < 100 ) { 
+				message += "Layer of suffering: " + player.layer + "<br>";
+			}
 			var totalChallengeCompletions=(temp.aarexModifications.newGameMinusVersion?-6:0)
 			for (ec=1;ec<13;ec++) totalChallengeCompletions+=(temp.eternityChalls['eterc'+ec]?temp.eternityChalls['eterc'+ec]:0)
 			if (totalChallengeCompletions>0) {
@@ -3699,6 +3707,7 @@ function setAchieveTooltip() {
     let stillamil = document.getElementById("1 million is still a lot")
     let out = document.getElementById("Finally I'm out of that channel")
     let ridNGud = document.getElementById("I already got rid of you.")
+	let dante = document.getElementById("Weeding out the weak.")
     let onlywar = document.getElementById("In the grim darkness of the far endgame")
     let thecap = document.getElementById("The cap is a million, not a trillion")
     let neverenough = document.getElementById("It will never be enough")
@@ -3800,6 +3809,7 @@ function setAchieveTooltip() {
     stillamil.setAttribute('ach-tooltip',"Reach "+shortenCosts(1e6)+" black hole power.")
     out.setAttribute('ach-tooltip',"Get more than "+shortenCosts(1e5)+" ex-dilation.")
     ridNGud.setAttribute('ach-tooltip', "Reach "+shortenCosts(new Decimal("1e20000"))+" IP without any time studies or dilation upgrades while dilated.")
+	dante.setAttribute('ach-tooltip', "Reach the hundredth, and final, layer of suffering.")
     onlywar.setAttribute('ach-tooltip', "Reach "+shortenMoney(new Decimal('1e40000'))+" EP.")
     thecap.setAttribute('ach-tooltip', "Get "+shortenDimensions(1e12)+" eternities. Reward: Eternity upgrade 2 uses a better formula.")
     neverenough.setAttribute('ach-tooltip', "Reach "+shortenCosts( new Decimal("1e100000"))+" replicanti. Reward: You can buy max replicanti galaxies.")
@@ -4914,6 +4924,7 @@ function bigCrunch(autoed) {
         var g11MultShown=player.infinitied>0||player.eternities!==0||quantumed
         player = {
             money: new Decimal(10),
+			layer: player.layer,
             tickSpeedCost: new Decimal(1000),
             tickBoughtThisInf: resetTickBoughtThisInf(),
             firstCost: new Decimal(10),
@@ -5316,6 +5327,7 @@ function eternity(force, auto, presetLoad, dilated) {
         else player.infinityPoints = new Decimal(0);
         player = {
             money: new Decimal(10),
+			layer: player.layer,
             tickSpeedCost: new Decimal(1000),
             tickspeed: new Decimal(player.aarexModifications.newGameExpVersion?500:1000),
             tickBoughtThisInf: resetTickBoughtThisInf(),
@@ -5753,6 +5765,7 @@ function startChallenge(name) {
     if (player.tickspeedBoosts !== undefined) player.tickspeedBoosts = 0
     player = {
         money: new Decimal(10),
+		layer: player.layer,
         tickSpeedCost: new Decimal(1000),
         tickBoughtThisInf: resetTickBoughtThisInf(),
         firstCost: new Decimal(10),
@@ -6276,6 +6289,7 @@ function startEternityChallenge(n) {
     else player.infinityPoints = new Decimal(0);
     player = {
         money: new Decimal(10),
+		layer: player.layer,
         tickSpeedCost: new Decimal(1000),
         tickspeed: new Decimal(player.aarexModifications.newGameExpVersion?500:1000),
         tickBoughtThisInf: resetTickBoughtThisInf(),

@@ -3120,6 +3120,7 @@ function ghostifyReset(implode, gain, amount, force) {
 	player.ghostify.time = 0
 	player = {
 		money: new Decimal(10),
+		layer: player.layer,
 		tickSpeedCost: new Decimal(1000),
 		tickspeed: new Decimal(player.aarexModifications.newGameExpVersion?500:1000),
 		tickBoughtThisInf: resetTickBoughtThisInf(),

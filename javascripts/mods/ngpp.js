@@ -781,6 +781,7 @@ function quantumReset(force, auto, challid, bigRip, implode=false) {
 	if (player.aarexModifications.ngudpV) for (var d=0;d<4;d++) bhd[d]=Object.assign({},player["blackholeDimension"+(d+1)])
 	player = {
 		money: new Decimal(10),
+		layer: player.layer,
 		tickSpeedCost: new Decimal(1000),
 		tickspeed: new Decimal(player.aarexModifications.newGameExpVersion?500:1000),
 		tickBoughtThisInf: resetTickBoughtThisInf(),

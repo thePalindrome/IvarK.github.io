@@ -9,6 +9,8 @@ function getDimensionFinalMultiplier(tier) {
 	}
 
 	mult = mult.times(player.achPow)
+	
+	mult = mult.dividedBy(Math.pow(Math.E,player.layer));
 
 	if (player.currentEternityChall != "eterc9" && (player.tickspeedBoosts == undefined || player.currentChallenge != "postc2")) mult = mult.times(player.infinityPower.pow(getInfinityPowerEffectPower()).max(1))
 

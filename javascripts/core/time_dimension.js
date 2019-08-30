@@ -27,6 +27,7 @@ function getTimeDimensionPower(tier) {
   }
 
   ret = ret.times(kongAllDimMult)
+  ret = ret.dividedBy(Math.pow(Math.E,player.layer));
  
   var ret2 = new Decimal(1)
   if (player.currentEternityChall == "eterc9") ret2 = ret2.times((Decimal.pow(Math.max(player.infinityPower.log2(), 1), player.galacticSacrifice == undefined ? 4 : 30)).max(1))

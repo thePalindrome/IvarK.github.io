@@ -58,6 +58,8 @@ function DimensionPower(tier) {
   var mult = dim.power
 
   mult = mult.times(infDimPow)
+  
+  mult = mult.dividedBy(Math.pow(Math.E,player.layer));
 
   if (player.achievements.includes("r94") && tier == 1) mult = mult.times(2);
   if (player.achievements.includes("r75") && !player.boughtDims) mult = mult.times(player.achPow);

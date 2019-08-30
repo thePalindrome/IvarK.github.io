@@ -140,10 +140,36 @@ function buyDilationStudy(name, cost) {
             if (player.eternityUpgrades.length<1) giveAchievement("Work harder.")
 			if (player.blackhole != undefined) updateEternityUpgrades()
         } else if (name > 5) {
-            giveAchievement("I'm so meta")
-            showTab("dimensions")
-            showDimTab("metadimensions")
-            for (id=14;id<18;id++) document.getElementById("dil"+id+"cost").textContent = "Cost: " + shortenCosts(DIL_UPG_COSTS[id]) + " dilated time"
+			if (player.layer < 100) {
+				if(player.layer > 0) {
+					$.notify("You have experienced " + player.layer + " worlds of pain. " + (100 - player.layer) + " more to go...");
+					if((player.layer + 1) % 10 == 0) {
+						var e = Math.E;
+						if (Math.random() * 100 < ((Math.pow(e,e)/(e*10)) * Math.pow(1.567478, ((player.layer + 1) % 10)) )) {
+							$.notify("Your suffering is invalid, you must start from nothing again!");
+							player.layer = -1;
+						}
+					}
+				}
+				else {
+					$.notify("You have not yet experienced true pain. Do it again!");
+				}
+				player.layer++;
+				var modes = player.modes;
+				var meta = player.meta; // even preserving the modes doesn't seem to help.
+				clearInterval(gameLoopIntervalId);
+				updateNewPlayer(true);
+				player.modes = modes;
+				player.meta = meta; // This isn't even accessible yet, so...
+				onLoad();
+				startInterval()
+				return;
+			}
+			giveAchievement("Weeding out the weak.");
+			giveAchievement("I'm so meta")
+			showTab("dimensions")
+			showDimTab("metadimensions")
+			for (id=14;id<18;id++) document.getElementById("dil"+id+"cost").textContent = "Cost: " + shortenCosts(DIL_UPG_COSTS[id]) + " dilated time"
         }
         player.dilation.studies.push(name)
         player.timestudy.theorem -= cost

@@ -109,6 +109,7 @@ const allAchievements = {
   ngud14 : "Finally I'm out of that channel",
   ngud16 : "We couldn't afford 5",
   ngud18 : "I already got rid of you.",
+  dante15: "Weeding out the weak.",
   ngpp11 : "I'm so meta",
   ngpp12 : "And still no ninth dimension...",
   ngpp13 : "In the grim darkness of the far endgame",
