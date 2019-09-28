@@ -3117,6 +3117,12 @@ function ghostifyReset(implode, gain, amount, force) {
 	if (bm > 15) giveAchievement("I rather oppose the theory of everything")
 	if (player.eternityPoints.e>=22e4&&player.ghostify.under) giveAchievement("Underchallenged")
 	if (player.ghostify.best<=5) giveAchievement("Running through Big Rips")
+	if (player.achievements.includes("ng3p68")) {
+		var neutrinoGain = getNeutrinoGain().times(1e7);
+		player.ghostify.neutrinos.electron = player.ghostify.neutrinos.electron.add(neutrinoGain);
+		player.ghostify.neutrinos.mu = player.ghostify.neutrinos.mu.add(neutrinoGain);
+		player.ghostify.neutrinos.tau = player.ghostify.neutrinos.tau.add(neutrinoGain);
+	}
 	player.ghostify.time = 0
 	player = {
 		money: new Decimal(10),
